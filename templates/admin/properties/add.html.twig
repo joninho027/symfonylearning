@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gérer les biens!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2 class="text-center">Ajouter un bien</h2>
+        <a href="{{ path('admin.property.index') }}">Retour à la liste des biens</a>
+        {{ include('admin/properties/_form_html.twig', {form: form, button: 'Ajouter'}) }}
+    </div>
+
+
+{% endblock %}

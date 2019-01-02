@@ -6,20 +6,33 @@
 
     <div class="container">
         <h2 class="text-center">Gérer les biens</h2>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+        <div>
+            <a href="{{ path('admin.property.add') }}" class="btn btn-primary">Ajouter un bien</a>
+        </div>
         <table class="table table-stripped">
             <thead>
                 <tr>
-                    <th>Titre</th>
-                    <th>Actions</th>
+                    <td>Titre</td>
+                    <td>Actions</td>
                 </tr>
             </thead>
             <tbody>
+            {% for property in properties %}
             <tr>
-                {% for property in properties %}
-                    <td>{{ property.title }}</td>
-                    <td><a href="{{ path('admin.property.edit', {id: property.id}) }}" class="btn btn-secondary">Editer</a></td>
-                {% endfor %}
+                <td>{{ property.title }}</td>
+                <td>
+                    <a href="{{ path('admin.property.edit', {id: property.id}) }}" class="btn btn-secondary">Editer</a>
+                    <form method="post" action="{{ path('admin.property.delete', {id: property.id}) }}" class="d-inline-block" onsubmit="return confirm('Etes vous certain ?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete'~ property.id) }}">
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                </td>
             </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
