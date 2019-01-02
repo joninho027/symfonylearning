@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gérer les biens!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2 class="text-center">Editer le bien</h2>
+        {{ form_start(form) }}
+        {{ form_rest(form) }}
+        <button class="btn btn-primary">Sauver</button>
+        {{ form_end(form) }}
+    </div>
+
+
+{% endblock %}
